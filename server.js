@@ -17,7 +17,7 @@ app.use(express.static('public'))
 
 const port = process.env.PORT || 3000;
 const corsOptions = {
-  origin: '*', //included origin as true
+  origin: 'https://sumegportfolio.netlify.app', //included origin as true
   credentials: true, //included credentials as true
 };
 
