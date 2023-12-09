@@ -25,6 +25,12 @@ const corsOptions = {
 // Middleware
 app.use(cors(corsOptions));
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', true);
+  // ... other headers
+  next();
+});
+
 
 // Define API routes
 const errorHandler = require('./utils/errorHandler'); // Import the error handler module
