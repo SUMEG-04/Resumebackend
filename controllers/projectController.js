@@ -3,6 +3,7 @@ const { Storage } = require('@google-cloud/storage');
 const storage = new Storage();
 const bucket = storage.bucket('mywebsite-sumeg');
 const { v4: uuidv4 } = require('uuid');
+const path = require('path'); // Add this line
 
 const projectController = {
   getAllProjects: async (req, res) => {
