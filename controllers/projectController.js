@@ -50,7 +50,7 @@ const projectController = {
     console.log(req.file);
     console.log(image.buffer);
 
-    
+
     // Check if all required fields are present
     if (!title || !description || !technologies || !feature || !projectlink || !role || !timeline || !image) {
       return res.status(400).json({ message: 'All fields are required' });
@@ -58,7 +58,7 @@ const projectController = {
   
     try {
       const uniqueFilename = `${uuidv4()}_${path.extname(image.originalname)}`;
-      const file = bucket.file(uniqueFilename);
+      const file = bucket.file(image.originalname);
 
       const stream = file.createWriteStream({
         metadata: {
