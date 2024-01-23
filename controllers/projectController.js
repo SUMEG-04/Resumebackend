@@ -47,7 +47,10 @@ const projectController = {
     } = req.body;
   
     const image = req.file;
-  
+    console.log(req.file);
+    console.log(image.buffer);
+
+    
     // Check if all required fields are present
     if (!title || !description || !technologies || !feature || !projectlink || !role || !timeline || !image) {
       return res.status(400).json({ message: 'All fields are required' });
