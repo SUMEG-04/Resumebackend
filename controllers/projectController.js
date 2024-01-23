@@ -1,4 +1,7 @@
 const Project = require('../models/Project');
+const { Storage } = require('@google-cloud/storage');
+const storage = new Storage();
+const bucket = storage.bucket('mywebsite-sumeg');
 
 const projectController = {
   getAllProjects: async (req, res) => {
@@ -46,11 +49,23 @@ const projectController = {
     }
   
     try {
+      const uniqueFilename = `${uuidv4()}_${path.extname(image.originalname)}`;
+      const file = bucket.file(uniqueFilename);
+
+      const stream = file.createWriteStream({
+        metadata: {
+          contentType: image.mimetype,
+        },
+      });
+
+      stream.end(image.buffer);
+
+      const imageUrl = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
       const newProject = new Project({
         title,
         description,
         technologies,
-        image: image.filename,
+        image: imageUrl,
         feature,
         projectlink,
         role,
