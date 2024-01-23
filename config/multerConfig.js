@@ -1,7 +1,6 @@
 // multerConfig.js
 const multer = require('multer');
 const { Storage } = require('@google-cloud/storage');
-const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 
 const storage = new Storage({
