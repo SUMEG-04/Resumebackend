@@ -5,6 +5,8 @@ const storage = new Storage({
   keyFilename: 'mykey.json',
 });
 const bucket = storage.bucket('mywebsite-sumeg');
+const { v4: uuidv4 } = require('uuid'); // Correct import order
+const path = require('path');
 
 const projectController = {
   getAllProjects: async (req, res) => {
@@ -52,7 +54,7 @@ const projectController = {
     }
   
     try {
-      const uniqueFilename = image;
+      const uniqueFilename = `${uuidv4()}_${path.extname(image.originalname)}`;
       const file = bucket.file(uniqueFilename);
 
       const stream = file.createWriteStream({
